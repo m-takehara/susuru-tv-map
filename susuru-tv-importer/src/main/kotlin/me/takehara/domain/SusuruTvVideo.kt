@@ -1,6 +1,6 @@
 package me.takehara.domain
 
-import me.takehara.domain.youtube.*
+import me.takehara.domain.youtube.UnvalidatedYoutubeVideo
 import me.takehara.domain.youtube.valueobject.*
 
 data class SusuruTvVideo(

@@ -1,7 +1,10 @@
 package me.takehara.gateway
 
 import com.google.api.services.youtube.model.PlaylistItem
-import me.takehara.domain.youtube.*
+import me.takehara.domain.youtube.ChannelId
+import me.takehara.domain.youtube.PlaylistId
+import me.takehara.domain.youtube.UnvalidatedYoutubeVideo
+import me.takehara.domain.youtube.UnvalidatedYoutubeVideos
 import me.takehara.domain.youtube.valueobject.*
 import me.takehara.driver.YoutubeApi
 import me.takehara.port.YoutubeVideoPort
@@ -32,29 +35,4 @@ class YoutubeVideoGateway(private val youtubeApi: YoutubeApi) : YoutubeVideoPort
             )
         }
     )
-
-    internal fun isPrivate(item: PlaylistItem) = item.snippet.title == "Private video"
-
-    internal fun hasNull(item: PlaylistItem): Boolean {
-        return item.id.isNullOrEmpty()
-                || item.snippet == null
-                || item.snippet.resourceId == null
-                || item.snippet.resourceId.videoId.isNullOrEmpty()
-                || item.snippet.title.isNullOrEmpty()
-                || item.snippet.description.isNullOrEmpty()
-                || item.snippet.publishedAt == null
-                || item.snippet.thumbnails == null
-                || isNullThumbnail(item.snippet.thumbnails.default)
-                || isNullThumbnail(item.snippet.thumbnails.high)
-                || isNullThumbnail(item.snippet.thumbnails.maxres)
-                || isNullThumbnail(item.snippet.thumbnails.medium)
-                || isNullThumbnail(item.snippet.thumbnails.standard)
-    }
-
-    private fun isNullThumbnail(thumbnail: com.google.api.services.youtube.model.Thumbnail?): Boolean {
-        return thumbnail == null
-                || thumbnail.url.isNullOrEmpty()
-                || thumbnail.height == null
-                || thumbnail.width == null
-    }
 }

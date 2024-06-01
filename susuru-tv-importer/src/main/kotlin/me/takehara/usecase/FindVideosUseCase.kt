@@ -2,12 +2,11 @@ package me.takehara.usecase
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import me.takehara.domain.youtube.ChannelId
-import me.takehara.domain.OutputDestination
-import me.takehara.domain.youtube.PlaylistId
 import me.takehara.domain.SusuruTvVideos
-import me.takehara.port.YoutubeVideoPort
+import me.takehara.domain.youtube.ChannelId
+import me.takehara.domain.youtube.PlaylistId
 import me.takehara.port.SusuruTvVideoPort
+import me.takehara.port.YoutubeVideoPort
 
 class FindVideosUseCase(
     private val youtubeVideoPort: YoutubeVideoPort,
