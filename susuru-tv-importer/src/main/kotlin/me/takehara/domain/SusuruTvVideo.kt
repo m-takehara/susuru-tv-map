@@ -1,9 +1,8 @@
 package me.takehara.domain
 
-import java.net.URL
-import java.time.ZonedDateTime
+import me.takehara.domain.youtube.*
+import me.takehara.domain.youtube.valueobject.*
 
-data class SusuruTvVideos(val list: List<SusuruTvVideo>): List<SusuruTvVideo> by list
 data class SusuruTvVideo(
     val id: Id,
     val videoId: VideoId,
@@ -11,21 +10,23 @@ data class SusuruTvVideo(
     val description: Description,
     val publishedDate: PublishedDate,
     val thumbnail: Thumbnails,
-)
-
-data class Id(val value: String)
-data class VideoId(val value: String)
-data class Title(val value: String)
-data class Description(val value: String)
-data class PublishedDate(val date: ZonedDateTime)
-data class Thumbnails(
-    val default: Thumbnail,
-    val high: Thumbnail,
-    val medium: Thumbnail,
-    val standard: Thumbnail,
-)
-data class Thumbnail(
-    val url: URL,
-    val height: Int,
-    val width: Int,
-)
+) {
+    companion object {
+        fun from(unvalidated: UnvalidatedYoutubeVideo) = SusuruTvVideo(
+            unvalidated.id!!,
+            unvalidated.videoId!!,
+            unvalidated.title!!,
+            unvalidated.description!!,
+            unvalidated.publishedDate!!,
+            unvalidated.thumbnails!!.let {
+                Thumbnails(
+                    it.default!!,
+                    it.high!!,
+                    it.maxres!!,
+                    it.medium!!,
+                    it.standard!!
+                )
+            }
+        )
+    }
+}

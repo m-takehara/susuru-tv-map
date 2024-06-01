@@ -1,17 +1,21 @@
 package me.takehara.usecase
 
-import me.takehara.domain.ChannelId
-import me.takehara.domain.OutputDestinationDirectories
-import me.takehara.domain.PlaylistId
-import me.takehara.port.SusuruTvVideoFindPort
-import me.takehara.port.SusuruTvVideoSavePort
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import me.takehara.domain.youtube.ChannelId
+import me.takehara.domain.OutputDestination
+import me.takehara.domain.youtube.PlaylistId
+import me.takehara.domain.SusuruTvVideos
+import me.takehara.port.YoutubeVideoPort
+import me.takehara.port.SusuruTvVideoPort
 
 class FindVideosUseCase(
-    private val susuruTvVideoFindPort: SusuruTvVideoFindPort,
-    private val susuruTvVideoSavePort: SusuruTvVideoSavePort,
+    private val youtubeVideoPort: YoutubeVideoPort,
+    private val susuruTvVideoPort: SusuruTvVideoPort,
 ) {
-    fun execute() {
-        val videos = susuruTvVideoFindPort.findBy(ChannelId.SusuruTv, PlaylistId.MainichiRamenSeikatsu)
-        susuruTvVideoSavePort.saveTo(OutputDestinationDirectories.OUTPUT_DIR.path, videos)
+    suspend fun execute() = withContext(Dispatchers.IO) {
+        val unvalidated = youtubeVideoPort.findBy(ChannelId.SusuruTv, PlaylistId.MainichiRamenSeikatsu)
+        val videos = SusuruTvVideos.from(unvalidated)
+        susuruTvVideoPort.save(videos)
     }
 }
