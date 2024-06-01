@@ -13,7 +13,7 @@ import me.takehara.driver.YoutubeApi
 import java.net.URL
 import java.time.ZonedDateTime
 
-class YoutubeVideoFindGatewayTest : FreeSpec({
+class YoutubeVideoGatewayTest : FreeSpec({
     "findBy" - {
         "Driverから取得した情報をUnvalidatedYoutubeVideoに変換する" {
             val youtubeApi = mockk<YoutubeApi>()

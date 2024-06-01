@@ -1,11 +1,9 @@
-package me.takehara.domain
+package me.takehara.domain.youtube
 
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockk
-import me.takehara.domain.youtube.UnvalidatedYoutubeVideo
-import me.takehara.domain.youtube.UnvalidatedYoutubeVideos
 
 class UnvalidatedYoutubeVideosTest : FreeSpec({
     "filterNonNullFields" - {
