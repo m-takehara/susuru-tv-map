@@ -19,6 +19,7 @@ class YoutubeApi {
     private val youtubeService: YouTube = getService()
 
     fun findPlaylistItems(channelId: String, playlistId: String): List<PlaylistItem> {
+        logger.info { "Fetching playlist items from YouTube API" }
         return fetchPlaylistItemsRecursively(channelId, playlistId, null)
     }
 
@@ -27,7 +28,6 @@ class YoutubeApi {
         playlistId: String,
         pageToken: String?
     ): List<PlaylistItem> {
-        logger.info { "Started fetching data using YouTube API, pageToken: $pageToken" }
         val request = youtubeService.playlistItems()
             .list(channelId)
             .setPlaylistId(playlistId)
@@ -42,6 +42,7 @@ class YoutubeApi {
         val currentItems = response.items ?: listOf()
 
         return if (response.nextPageToken.isNullOrEmpty()) {
+            logger.info { "Fetched ${currentItems.size} items" }
             currentItems
         } else {
             currentItems + fetchPlaylistItemsRecursively(channelId, playlistId, response.nextPageToken)

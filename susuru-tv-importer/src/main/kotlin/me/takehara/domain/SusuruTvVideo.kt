@@ -4,7 +4,6 @@ import me.takehara.domain.youtube.UnvalidatedYoutubeVideo
 import me.takehara.domain.youtube.valueobject.*
 
 data class SusuruTvVideo(
-    val id: Id,
     val videoId: VideoId,
     val title: Title,
     val description: Description,
@@ -13,7 +12,6 @@ data class SusuruTvVideo(
 ) {
     companion object {
         fun from(unvalidated: UnvalidatedYoutubeVideo) = SusuruTvVideo(
-            unvalidated.id!!,
             unvalidated.videoId!!,
             unvalidated.title!!,
             unvalidated.description!!,

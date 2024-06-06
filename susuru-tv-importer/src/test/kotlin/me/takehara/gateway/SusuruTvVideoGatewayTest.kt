@@ -18,7 +18,6 @@ class SusuruTvVideoGatewayTest : FreeSpec({
         val videos = SusuruTvVideos(
             listOf(
                 SusuruTvVideo(
-                    Id("id"),
                     VideoId("videoId"),
                     Title("title"),
                     Description("description"),
@@ -34,8 +33,8 @@ class SusuruTvVideoGatewayTest : FreeSpec({
             )
         )
         val rows = listOf(
-            "id,videoId,title,publishedDate,thumbnail.default,thumbnail.high,thumbnail.maxres,thumbnail.medium,thumbnail.standard",
-            "id,videoId,title,$now,https://default,https://high,https://maxres,https://medium,https://standard",
+            "videoId,title,publishedDate,thumbnail.default,thumbnail.high,thumbnail.maxres,thumbnail.medium,thumbnail.standard",
+            "videoId,title,$now,https://default,https://high,https://maxres,https://medium,https://standard",
         )
 
         coEvery { fileDriver.saveAll(any(), any()) } just runs

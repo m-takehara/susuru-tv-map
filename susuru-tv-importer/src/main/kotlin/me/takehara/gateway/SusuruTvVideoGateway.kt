@@ -9,11 +9,10 @@ class SusuruTvVideoGateway(
     private val fileDriver: FileDriver,
     private val dest: OutputDestination,
 ) : SusuruTvVideoPort {
-    private val titleRow = "id,videoId,title,publishedDate,thumbnail.default,thumbnail.high,thumbnail.maxres,thumbnail.medium,thumbnail.standard"
+    private val titleRow = "videoId,title,publishedDate,thumbnail.default,thumbnail.high,thumbnail.maxres,thumbnail.medium,thumbnail.standard"
 
     override suspend fun save(susuruTvVideos: SusuruTvVideos) {
         val rows = susuruTvVideos.map {
-            it.id.value + "," +
                     it.videoId.value + "," +
                     it.title.value + "," +
                     it.publishedDate.date.toString() + "," +

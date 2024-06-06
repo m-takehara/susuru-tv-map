@@ -25,7 +25,6 @@ class SusuruTvVideoTest : FreeSpec({
             )
         )
         val expected = SusuruTvVideo(
-            Id("id"),
             VideoId("videoId"),
             Title("title"),
             Description("description"),

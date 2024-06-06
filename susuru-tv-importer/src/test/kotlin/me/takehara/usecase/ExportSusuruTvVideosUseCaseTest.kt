@@ -9,7 +9,7 @@ import me.takehara.domain.youtube.UnvalidatedYoutubeVideos
 import me.takehara.port.SusuruTvVideoPort
 import me.takehara.port.YoutubeVideoPort
 
-class FindVideoUseCaseTest : FreeSpec({
+class ExportSusuruTvVideosUseCaseTest : FreeSpec({
     "SUSURU TVの動画一覧を取得して保存する" {
         mockkObject(SusuruTvVideos)
         val findPort = mockk<YoutubeVideoPort>()
@@ -21,7 +21,7 @@ class FindVideoUseCaseTest : FreeSpec({
         every { SusuruTvVideos.from(unvalidated) } returns videos
         coEvery { savePort.save(videos) } just runs
 
-        val target = FindVideosUseCase(findPort, savePort)
+        val target = ExportSusuruTvVideosUseCase(findPort, savePort)
         target.execute()
 
         coVerify { savePort.save(videos) }

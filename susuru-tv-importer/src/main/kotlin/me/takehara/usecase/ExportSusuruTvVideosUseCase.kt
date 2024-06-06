@@ -8,7 +8,7 @@ import me.takehara.domain.youtube.PlaylistId
 import me.takehara.port.SusuruTvVideoPort
 import me.takehara.port.YoutubeVideoPort
 
-class FindVideosUseCase(
+class ExportSusuruTvVideosUseCase(
     private val youtubeVideoPort: YoutubeVideoPort,
     private val susuruTvVideoPort: SusuruTvVideoPort,
 ) {
