@@ -2,7 +2,7 @@ package me.takehara.gateway
 
 import io.kotest.core.spec.style.FreeSpec
 import io.mockk.*
-import me.takehara.domain.OutputDestination
+import me.takehara.domain.DestinationDir
 import me.takehara.domain.SusuruTvVideo
 import me.takehara.domain.SusuruTvVideos
 import me.takehara.domain.youtube.valueobject.*
@@ -13,7 +13,7 @@ import java.time.ZonedDateTime
 class SusuruTvVideoGatewayTest : FreeSpec({
     "SusuruTvVideosを保存する" {
         val fileDriver = mockk<FileDriver>()
-        val dest = OutputDestination.OutputDir
+        val dest = DestinationDir.Output
         val now = ZonedDateTime.now()
         val videos = SusuruTvVideos(
             listOf(

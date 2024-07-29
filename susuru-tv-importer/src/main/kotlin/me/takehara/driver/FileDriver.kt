@@ -9,10 +9,10 @@ import java.nio.file.Paths
 import java.nio.file.StandardOpenOption
 
 class FileDriver {
-    suspend fun saveAll(rows: List<String>, destination: Path) {
+    suspend fun saveAll(rows: List<String>, destination: Path, fileName: String) {
         withContext(Dispatchers.IO) {
             if (Files.notExists(destination)) Files.createDirectories(destination)
-            val file = Paths.get(destination.toString(), "output.csv")
+            val file = Paths.get(destination.toString(), fileName)
             if (Files.notExists(file)) Files.createFile(file)
             Files.write(
                 file,
